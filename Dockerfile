@@ -17,5 +17,5 @@ COPY /app /app
 # Open port for Docker
 EXPOSE 3001
 
-# Run flask
+# Run streamlit
 CMD streamlit run Предсказание_оттока.py --server.port 3001

@@ -33,7 +33,7 @@ def to_csv(submission):
 
 
 def kde(submission, filename):
-    sns.kdeplot(submission['proba_1'], shade=True, label='Класс 1', color='g')
+    sns.kdeplot(submission['proba_1'], fill=True, label='Класс 1', color='g')
     plt.title('Плотность распределения предсказанных скоров')
     plt.xlabel('Скор')
     plt.ylabel('Плотность')

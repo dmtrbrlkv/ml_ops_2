@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 
-from app.src.feature_importance import get_feature_importance
+from src.feature_importance import get_feature_importance
 
 st.set_page_config(
     page_title="Топ-5 фичей"

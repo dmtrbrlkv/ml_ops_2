@@ -1,4 +1,10 @@
-# ml_ops_2
-Dummy project within ML Ops 2 homework with model inference for MTS Teta Competition
+# ML Ops - Домашнее задание 1
+ - предсказание оттока
+ - топ-5 feature importances используемой модели
+ - графиком плотности распределения предсказанных моделью скоров
+ - фронт реализован на streamlit
+ - проект собран в докер образ dmtrbrlkv/teta_ml_ops:1.0
 
-Service requires file `train.csv` to be located at `./app/train_data/` to work correctly. File should be downloaded from ML competetion [MTS Teta ML 1](https://www.kaggle.com/competitions/teta-mts-ml-1/data).
+Из-за особенностей стримлита порт 3000 зарезервирован, для запуска докер-контейнера указать -p 3000:3001
+docker run -d -p 3000:3001 dmtrbrlkv/teta_ml_ops:1.0
+Веб-интерфейс будем доступен по адресу http://localhost:3000

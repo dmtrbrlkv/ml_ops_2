@@ -4,7 +4,7 @@ import json
 from src.feature_importance import get_feature_importance
 
 st.set_page_config(
-    page_title="Топ-5 фичей"
+    page_title='Топ-5 фичей'
 )
 
 st.title('Топ-5 фичей')

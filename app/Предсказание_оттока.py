@@ -5,16 +5,17 @@ import datetime
 import tempfile
 
 st.set_page_config(
-    page_title="Предсказание оттока"
+    page_title='Предсказание оттока'
 )
 
 
 st.title('Предсказание оттока')
-uploaded_file = st.file_uploader("Загрузите датасет", "csv")
+st.header('Загрузите датасет')
+uploaded_file = st.file_uploader(' ', 'csv', label_visibility='hidden')
 
 if uploaded_file is not None:
-    with tempfile.NamedTemporaryFile(suffix=".csv") as f:
-        if st.button("Предсказать"):
+    with tempfile.NamedTemporaryFile(suffix='.csv') as f:
+        if st.button('Предсказать'):
             with st.spinner('Обработка файла'):
                 data = uploaded_file.getvalue()
                 f.write(data)
@@ -29,13 +30,13 @@ if uploaded_file is not None:
                 csv = scorer.to_csv(submission)
 
             st.download_button(
-                label="Скачать предсказания",
+                label='Скачать предсказания',
                 data=csv,
-                file_name="predict_" + datetime.datetime.now().isoformat() + ".csv",
-                mime="text/csv",
+                file_name='predict_' + datetime.datetime.now().isoformat() + '.csv',
+                mime='text/csv',
             )
 
             with st.spinner('Распределение скоров'):
-                with tempfile.NamedTemporaryFile(suffix=".png") as f:
+                with tempfile.NamedTemporaryFile(suffix='.png') as f:
                     scorer.kde(submission, f.name)
                     st.image(f.name)

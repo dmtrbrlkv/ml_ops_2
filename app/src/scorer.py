@@ -28,7 +28,7 @@ def make_pred(dt, path_to_file):
 
 
 def to_csv(submission):
-    csv = submission.drop(columns=['proba_1']).to_csv(index=False).encode("utf-8")
+    csv = submission.drop(columns=['proba_1']).to_csv(index=False).encode('utf-8')
     return csv
 
 

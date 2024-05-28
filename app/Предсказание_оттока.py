@@ -1,13 +1,15 @@
-import streamlit as st
-import src.preprocessing as preprocessing
-import src.scorer as scorer
 import datetime
 import tempfile
 
+import streamlit as st
+
+import src.preprocessing as preprocessing
+import src.scorer as scorer
+
+csv = None
 st.set_page_config(
     page_title='Предсказание оттока'
 )
-
 
 st.title('Предсказание оттока')
 st.header('Загрузите датасет')
@@ -29,14 +31,13 @@ if uploaded_file is not None:
                 submission = scorer.make_pred(preprocessed_df, filename)
                 csv = scorer.to_csv(submission)
 
+            with st.spinner('Распределение скоров'):
+                fig = scorer.kde(submission)
+                st.pyplot(fig)
+
             st.download_button(
                 label='Скачать предсказания',
                 data=csv,
                 file_name='predict_' + datetime.datetime.now().isoformat() + '.csv',
                 mime='text/csv',
             )
-
-            with st.spinner('Распределение скоров'):
-                with tempfile.NamedTemporaryFile(suffix='.png') as f:
-                    scorer.kde(submission, f.name)
-                    st.image(f.name)

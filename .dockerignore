@@ -1,3 +1,1 @@
-.venv3.10
-app/output/*
-app/input/*
+.*

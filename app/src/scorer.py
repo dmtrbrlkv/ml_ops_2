@@ -1,12 +1,10 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
-from catboost import CatBoostClassifier
+from src.load_model import load_model
+import plotly.figure_factory as ff
 
 
 def make_pred(dt, path_to_file):
-    model = CatBoostClassifier()
-    model.load_model('./models/teta_cb.cbm')
+    model = load_model()
 
     submission = pd.DataFrame({
         'client_id': pd.read_csv(path_to_file)['client_id'],
@@ -21,12 +19,8 @@ def to_csv(submission):
     return csv
 
 
-def kde(submission):
-    fig = plt.figure()
-    sns.kdeplot(submission['proba_1'], fill=True, label='Класс 1', color='g')
-    plt.title('Плотность распределения предсказанных скоров')
-    plt.xlabel('Скор')
-    plt.ylabel('Плотность')
-    plt.grid()
-    plt.legend()
+def distplot(submission):
+    fig = ff.create_distplot([submission['proba_1']], bin_size=0.05, group_labels=['Класс 1'], show_rug=False,
+                             colors=['green'])
+    fig.update_layout(title_text='Плотность распределения предсказанных скоров')
     return fig

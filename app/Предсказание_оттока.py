@@ -32,8 +32,9 @@ if uploaded_file is not None:
                 csv = scorer.to_csv(submission)
 
             with st.spinner('Распределение скоров'):
-                fig = scorer.kde(submission)
-                st.pyplot(fig)
+                fig = scorer.distplot(submission)
+                # st.pyplot(fig)
+                st.plotly_chart(fig)
 
             st.download_button(
                 label='Скачать предсказания',
